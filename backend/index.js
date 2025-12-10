@@ -6,6 +6,7 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 
 // Route Imports
+const authRoutes = require('./routes/authRoutes');
 const moodRoutes = require('./routes/moodRoutes');
 
 // Connect to database
@@ -22,6 +23,7 @@ app.use(
 app.use(express.json());
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/mood', moodRoutes);
 
 app.get('/', (req, res) => {
