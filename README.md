@@ -1,7 +1,5 @@
 # Mood Tracker
 
-# The Project: Daily Mood Tracker
-
 A simple app where users can:
 
 Log their mood for the day (with an emoji and optional note)
