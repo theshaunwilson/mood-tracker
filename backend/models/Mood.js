@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const moodSchema = new mongoose.Schema({
+const MoodSchema = new mongoose.Schema({
   emoji: { type: String, required: true },
   note: { type: String },
   date: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('Mood', moodSchema);
+module.exports = mongoose.model('Mood', MoodSchema);
