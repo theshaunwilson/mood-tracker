@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const moodController = require('../controllers/moodController');
 
 router.get('/', moodController.getMoods);
 router.post('/', moodController.createMood);

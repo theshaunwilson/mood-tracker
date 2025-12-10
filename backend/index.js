@@ -5,6 +5,9 @@ const app = express();
 const cors = require('cors');
 const connectDB = require('./config/db');
 
+// Route Imports
+const moodRoutes = require('./routes/moodRoutes');
+
 // Connect to database
 connectDB();
 
@@ -17,6 +20,9 @@ app.use(
 );
 
 app.use(express.json());
+
+// Routes
+app.use('/api/mood', moodRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Mood tracker api' });
