@@ -21,6 +21,10 @@ exports.getMoodById = async (req, res) => {
       return res.status(404).json({ error: 'Mood not found' });
     }
 
+    if (mood.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
+
     res.json(mood);
   } catch (error) {
     console.error('getMoodById error', error);
@@ -50,6 +54,16 @@ exports.updateMood = async (req, res) => {
   try {
     const { id } = req.params;
 
+    const mood = await Mood.findById(id);
+
+    if (!mood) {
+      return res.status(404).json({ error: 'Mood not found' });
+    }
+
+    if (mood.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
+
     const { emoji, note, date } = req.body;
 
     const updateFields = {};
@@ -76,11 +90,17 @@ exports.deleteMood = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const mood = await Mood.findByIdAndDelete(id);
+    const mood = await Mood.findById(id);
 
     if (!mood) {
       return res.status(404).json({ error: 'Mood not found' });
     }
+
+    if (mood.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
+
+    await Mood.findByIdAndDelete(id);
 
     res.json({ message: 'Mood successfully deleted' });
   } catch (error) {
