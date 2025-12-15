@@ -1,6 +1,6 @@
 # Mood Tracker
 
-A simple app where users can:
+A simple app where users can
 
 Log their mood for the day (with an emoji and optional note).
 View their mood history as a colourful timeline.
