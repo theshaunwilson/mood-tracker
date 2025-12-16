@@ -17,7 +17,17 @@ exports.signup = async (req, res) => {
     });
 
     newUser.password = undefined;
-    res.json({ user: newUser });
+
+    const userForToken = {
+      email: newUser.email,
+      id: newUser._id,
+    };
+
+    const token = jwt.sign(userForToken, process.env.SECRET, {
+      expiresIn: 60 * 60,
+    });
+
+    res.json({ user: newUser, token });
   } catch (error) {
     console.error('Signup error', error);
     res.status(500).json({ error: 'Server error' });
