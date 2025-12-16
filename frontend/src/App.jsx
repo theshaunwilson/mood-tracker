@@ -1,5 +1,14 @@
+import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
+
 function App() {
-  return <h1>Mood Tracker</h1>;
+  return (
+    <div>
+      <h1>Mood tracker</h1>
+      <LoginForm />
+      <SignupForm />
+    </div>
+  );
 }
 
 export default App;
