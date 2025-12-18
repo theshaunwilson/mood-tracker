@@ -1,12 +1,13 @@
-import LoginForm from './components/LoginForm';
-import SignupForm from './components/SignupForm';
+import { useNavigate } from 'react-router';
 
 function App() {
+  const navigate = useNavigate();
+
   return (
     <div>
       <h1>Mood tracker</h1>
-      <LoginForm />
-      <SignupForm />
+      <button onClick={() => navigate('/signup')}>Click to signup</button>
+      <button onClick={() => navigate('/login')}>Click to login</button>
     </div>
   );
 }
