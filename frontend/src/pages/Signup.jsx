@@ -17,19 +17,22 @@ function Signup() {
   };
 
   return (
-    <div>
-      <h1>Signup</h1>
+    <div className="m-2">
+      <h1 className="text-5xl font-bold mb-2">Signup</h1>
       <form className="flex flex-col" onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email" className="text-2xl">
+          Email
+        </label>
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           id="email"
           type="email"
           placeholder="Enter your email..."
+          className="border-2 w-100 rounded"
         />
 
-        <label value={password} htmlFor="password">
+        <label value={password} htmlFor="password" className="text-2xl">
           Password
         </label>
         <input
@@ -38,9 +41,19 @@ function Signup() {
           id="password"
           type="password"
           placeholder="Enter your password..."
+          className="border-2 w-100 rounded"
         />
-        <button>Signup</button>
-        <button onClick={() => navigate('/login')}>Go to login page</button>
+        <div>
+          <button className="font-bold py-2 px-4 rounded bg-blue-400 w-30 h-10 mr-2">
+            Signup
+          </button>
+          <button
+            onClick={() => navigate('/login')}
+            className="font-bold py-2 px-4 rounded bg-green-400 w-30 h-10 mt-2"
+          >
+            Login
+          </button>
+        </div>
       </form>
     </div>
   );
