@@ -1,11 +1,11 @@
-import React from 'react';
 import { useState } from 'react';
-
-// todo - onChange / Value / console.log
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,6 +40,7 @@ function Signup() {
           placeholder="Enter your password..."
         />
         <button>Signup</button>
+        <button onClick={() => navigate('/login')}>Go to login page</button>
       </form>
     </div>
   );
