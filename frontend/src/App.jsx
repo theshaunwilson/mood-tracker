@@ -1,13 +1,16 @@
-import { useNavigate } from 'react-router';
+import { Routes, Route } from 'react-router-dom';
+import Landing from './pages/Landing';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
 
 function App() {
-  const navigate = useNavigate();
-
   return (
     <div>
-      <h1>Mood tracker</h1>
-      <button onClick={() => navigate('/signup')}>Click to signup</button>
-      <button onClick={() => navigate('/login')}>Click to login</button>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </div>
   );
 }
