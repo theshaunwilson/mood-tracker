@@ -24,8 +24,8 @@ function Signup() {
 
       navigate('/dashboard');
     } catch (error) {
-      console.error(error);
       setError(error);
+      console.error(error);
     }
   };
 

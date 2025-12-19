@@ -1,23 +1,38 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import Error from '../components/Error';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+
+  const { login } = useAuth();
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      console.log(email, password);
+      const result = await login(email, password);
+
+      if (!result.success) {
+        setError(result.error);
+        return;
+      }
+
+      navigate('/dashboard');
     } catch (error) {
+      setError(error);
       console.error(error);
     }
   };
 
   return (
     <div className="m-2">
+      {error && <Error message={error} />}
       <h1 className="text-5xl font-bold mb-2">Login</h1>
       <form className="flex flex-col" onSubmit={handleSubmit}>
         <label htmlFor="email" className="text-2xl">
@@ -44,7 +59,10 @@ function Login() {
           className="border-2 w-100 rounded"
         />
         <div>
-          <button className="font-bold py-2 px-4 rounded bg-green-400 w-30 h-10 mr-2">
+          <button
+            onClick={handleSubmit}
+            className="font-bold py-2 px-4 rounded bg-green-400 w-30 h-10 mr-2"
+          >
             Login
           </button>
           <button
