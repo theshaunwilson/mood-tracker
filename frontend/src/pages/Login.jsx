@@ -44,12 +44,12 @@ function Login() {
           className="border-2 w-100 rounded"
         />
         <div>
-          <button className="font-bold py-2 px-4 rounded bg-blue-400 w-30 h-10 mr-2">
+          <button className="font-bold py-2 px-4 rounded bg-green-400 w-30 h-10 mr-2">
             Login
           </button>
           <button
             onClick={() => navigate('/signup')}
-            className="font-bold py-2 px-4 rounded bg-green-400 w-30 h-10 mt-2"
+            className="font-bold py-2 px-4 rounded bg-blue-400 w-30 h-10 mt-2"
           >
             Signup
           </button>
