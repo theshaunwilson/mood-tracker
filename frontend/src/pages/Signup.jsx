@@ -1,23 +1,37 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import Error from '../components/Error';
 
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
+  const { signup } = useAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      console.log(email, password);
+      const result = await signup(email, password);
+
+      if (!result.success) {
+        setError(result.error);
+        return;
+      }
+
+      navigate('/dashboard');
     } catch (error) {
       console.error(error);
+      setError(error);
     }
   };
 
   return (
     <div className="m-2">
+      {error && <Error message={error} />}
       <h1 className="text-5xl font-bold mb-2">Signup</h1>
       <form className="flex flex-col" onSubmit={handleSubmit}>
         <label htmlFor="email" className="text-2xl">
