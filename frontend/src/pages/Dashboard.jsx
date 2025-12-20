@@ -8,18 +8,26 @@ import MoodTable from '../components/MoodTable';
 function Dashboard() {
   const [moods, setMoods] = useState([]);
 
-  const { logout } = useAuth();
+  const { logout, token } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getMoods = async () => {
-      const response = await API.get('/mood');
-      const userMoods = await response.json();
-      setMoods(userMoods);
+    const fetchMoods = async () => {
+      if (!token) {
+        return;
+      }
+
+      try {
+        const response = await API.get('/mood');
+        console.log(response.data);
+        setMoods(response.data);
+      } catch (error) {
+        console.error('Failed to fetch moods', error);
+      }
     };
 
-    getMoods();
-  }, []);
+    fetchMoods();
+  }, [token]);
 
   const handleLogout = () => {
     logout();
