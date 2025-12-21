@@ -4,13 +4,14 @@ function MoodForm() {
   const [emoji, setEmoji] = useState('');
   const [note, setNote] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     console.log(emoji, note);
   };
 
   return (
     <div className="bg-white rounded shadow-sm p-4 max-w-md ">
-      <form className="space-y-4 flex flex-col">
+      <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
         {/* Emoji */}
         <label htmlFor="emoji" className="text-2xl">
           Emoji
@@ -38,7 +39,6 @@ function MoodForm() {
         />
         {/* Submit */}
         <button
-          onSubmit={() => handleSubmit}
           type="submit"
           className="px-4 py-2 rounded bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition"
         >
