@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import API from '../services/api';
 
 import MoodTable from '../components/MoodTable';
+import MoodForm from '../components/MoodForm';
 
 function Dashboard() {
   const [moods, setMoods] = useState([]);
@@ -18,8 +19,12 @@ function Dashboard() {
       }
 
       try {
-        const response = await API.get('/mood');
-        console.log(response.data);
+        const response = await API.get('/mood', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
         setMoods(response.data);
       } catch (error) {
         console.error('Failed to fetch moods', error);
@@ -34,13 +39,16 @@ function Dashboard() {
     navigate('/');
   };
 
-  console.log(moods);
-
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-5xl font-bold mb-6 text-gray-800">Dashboard</h1>
-        <h2 className="text-2xl font-bold mb-6 text-gray-700">Recent moods</h2>
+
+        <h2 className="text-2xl font-bold mt-2 mb-2 text-gray-800">Add Mood</h2>
+        <MoodForm />
+        <h2 className="text-2xl font-bold mt-2 mb-2 text-gray-800">
+          Recent moods
+        </h2>
         <div className="bg-white rounded shadow-sm p-4 mb-4">
           <MoodTable moods={moods} />
         </div>
