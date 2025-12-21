@@ -27,7 +27,7 @@ function MoodForm({ onMoodAdded }) {
   };
 
   return (
-    <div className="bg-white rounded shadow-sm p-4 max-w-md ">
+    <div className="bg-white rounded shadow-sm p-4 max-w-md">
       {error && <Error message={error} />}
       <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
         {/* Emoji */}
