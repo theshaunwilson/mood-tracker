@@ -1,16 +1,25 @@
 import { useState } from 'react';
+import Error from '../components/Error';
 
 function MoodForm() {
   const [emoji, setEmoji] = useState('');
   const [note, setNote] = useState('');
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+    } catch (error) {
+      setError(error);
+      console.error(error);
+    }
     console.log(emoji, note);
   };
 
   return (
     <div className="bg-white rounded shadow-sm p-4 max-w-md ">
+      {error && <Error message={error} />}
       <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
         {/* Emoji */}
         <label htmlFor="emoji" className="text-2xl">
