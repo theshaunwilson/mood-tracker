@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import API from '../services/api';
@@ -12,27 +12,24 @@ function Dashboard() {
   const { logout, token } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchMoods = async () => {
-      if (!token) {
-        return;
-      }
+  const fetchMoods = useCallback(async () => {
+    if (!token) return;
 
-      try {
-        const response = await API.get('/mood', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        setMoods(response.data);
-      } catch (error) {
-        console.error('Failed to fetch moods', error);
-      }
-    };
-
-    fetchMoods();
+    try {
+      const response = await API.get('/mood', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setMoods(response.data);
+    } catch (error) {
+      console.error('Failed to fetch moods', error);
+    }
   }, [token]);
+
+  useEffect(() => {
+    fetchMoods();
+  }, [fetchMoods]);
 
   const handleLogout = () => {
     logout();
@@ -45,7 +42,7 @@ function Dashboard() {
         <h1 className="text-5xl font-bold mb-6 text-gray-800">Dashboard</h1>
 
         <h2 className="text-2xl font-bold mt-2 mb-2 text-gray-800">Add Mood</h2>
-        <MoodForm />
+        <MoodForm onMoodAdded={fetchMoods} />
         <h2 className="text-2xl font-bold mt-2 mb-2 text-gray-800">
           Recent moods
         </h2>

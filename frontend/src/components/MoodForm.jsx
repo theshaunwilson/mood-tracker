@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import API from '../services/api';
 import Error from '../components/Error';
 
-function MoodForm() {
+function MoodForm({ onMoodAdded }) {
   const [emoji, setEmoji] = useState('');
   const [note, setNote] = useState('');
   const [error, setError] = useState(null);
@@ -10,11 +11,19 @@ function MoodForm() {
     e.preventDefault();
 
     try {
+      const mood = {
+        emoji,
+        note,
+      };
+
+      await API.post('/mood', mood);
+      onMoodAdded();
+      setEmoji('');
+      setNote('');
     } catch (error) {
       setError(error);
       console.error(error);
     }
-    console.log(emoji, note);
   };
 
   return (
@@ -29,7 +38,7 @@ function MoodForm() {
           value={emoji}
           onChange={(e) => setEmoji(e.target.value)}
           id="emoji"
-          type="emoji"
+          type="text"
           placeholder="Enter your emoji..."
           className="w-100 rounded"
         />
@@ -42,7 +51,7 @@ function MoodForm() {
           value={note}
           onChange={(e) => setNote(e.target.value)}
           id="note"
-          type="note"
+          type="text"
           placeholder="Enter your note..."
           className="w-100 rounded"
         />
