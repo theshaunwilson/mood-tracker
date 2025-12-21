@@ -31,7 +31,7 @@ function MoodForm({ onMoodAdded }) {
       {error && <Error message={error} />}
       <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
         {/* Emoji */}
-        <label htmlFor="emoji" className="text-2xl">
+        <label htmlFor="emoji" className="text-lg">
           Emoji
         </label>
         <input
@@ -40,11 +40,11 @@ function MoodForm({ onMoodAdded }) {
           id="emoji"
           type="text"
           placeholder="Enter your emoji..."
-          className="w-100 rounded"
+          className="bg-gray-50 rounded"
         />
 
         {/* Note */}
-        <label htmlFor="note" className="text-2xl">
+        <label htmlFor="note" className="text-lg">
           Note
         </label>
         <input
@@ -53,7 +53,7 @@ function MoodForm({ onMoodAdded }) {
           id="note"
           type="text"
           placeholder="Enter your note..."
-          className="w-100 rounded"
+          className="bg-gray-50 rounded"
         />
         {/* Submit */}
         <button
