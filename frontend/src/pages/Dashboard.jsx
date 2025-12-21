@@ -37,15 +37,21 @@ function Dashboard() {
   console.log(moods);
 
   return (
-    <div>
-      <h1 className="text-5xl font-bold mb-2">Dashboard</h1>
-      <MoodTable moods={moods} />
-      <button
-        onClick={handleLogout}
-        className="font-bold py-2 px-4 rounded bg-orange-400 w-30 h-10 mt-2"
-      >
-        Logout
-      </button>
+    <div className="min-h-screen bg-gray-100 p-6">
+      <div className="max-w-5xl mx-auto">
+        <h1 className="text-5xl font-bold mb-6 text-gray-800">Dashboard</h1>
+        <h2 className="text-2xl font-bold mb-6 text-gray-700">Recent moods</h2>
+        <div className="bg-white rounded shadow-sm p-4 mb-4">
+          <MoodTable moods={moods} />
+        </div>
+
+        <button
+          onClick={handleLogout}
+          className="font-bold py-2 px-4 rounded bg-orange-400 text-white hover:bg-orange-500 transition"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }
