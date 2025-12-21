@@ -2,28 +2,16 @@ import { useState } from 'react';
 import API from '../services/api';
 import Error from '../components/Error';
 
-function MoodForm({ onMoodAdded }) {
+function MoodForm({ onSubmit }) {
   const [emoji, setEmoji] = useState('');
   const [note, setNote] = useState('');
   const [error, setError] = useState(null);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    try {
-      const mood = {
-        emoji,
-        note,
-      };
-
-      await API.post('/mood', mood);
-      onMoodAdded();
-      setEmoji('');
-      setNote('');
-    } catch (error) {
-      setError(error);
-      console.error(error);
-    }
+    onSubmit({ emoji, note });
+    setEmoji('');
+    setNote('');
   };
 
   return (
