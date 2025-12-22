@@ -3,10 +3,16 @@ function MoodTable({ moods }) {
     <li key={mood._id} className="bg-gray-50">
       <p className="text-lg">Mood: {mood.emoji}</p>
       <p className="text-lg">Note: {mood.note}</p>
+      <button className="mr-2 font-bold py-2 px-4 rounded bg-green-400 text-white hover:bg-orange-500 transition">
+        Update
+      </button>
+      <button className="mr-2 font-bold py-2 px-4 rounded bg-red-400 text-white hover:bg-orange-500 transition">
+        Delete
+      </button>
     </li>
   ));
 
-  return <ul className="flex flex-col gap-2">{moodItems}</ul>;
+  return <ul className="f gap-2">{moodItems}</ul>;
 }
 
 export default MoodTable;
