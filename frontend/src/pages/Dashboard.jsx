@@ -33,6 +33,31 @@ function Dashboard() {
     }
   };
 
+  const handleUpdateMood = async (id) => {
+    try {
+      console.log(mood._id);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDeleteMood = async (id) => {
+    try {
+      const confirm = window.confirm(
+        'Are you sure you want to delete this mood?'
+      );
+
+      if (!confirm) {
+        return;
+      }
+
+      await API.delete(`/mood/${id}`);
+      setMoods((prev) => prev.filter((m) => m._id !== id));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleLogout = () => {
     logout();
     navigate('/');
@@ -49,7 +74,11 @@ function Dashboard() {
           Recent moods
         </h2>
         <div className="bg-white rounded shadow-sm p-4 mb-4">
-          <MoodTable moods={moods} />
+          <MoodTable
+            moods={moods}
+            onUpdate={handleUpdateMood}
+            onDelete={handleDeleteMood}
+          />
         </div>
 
         <button
