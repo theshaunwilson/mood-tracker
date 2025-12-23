@@ -1,10 +1,10 @@
-function MoodTable({ moods, onUpdate, onDelete }) {
+function MoodTable({ moods, onDelete }) {
   const moodItems = moods.map((mood) => (
     <li key={mood._id} className="bg-gray-50">
       <p className="text-lg">Mood: {mood.emoji}</p>
       <p className="text-lg">Note: {mood.note}</p>
       <button
-        onClick={() => onUpdate(mood._id)}
+        onClick={() => console.log('edit')}
         className="mr-2 font-bold py-2 px-4 rounded bg-green-400 text-white hover:bg-green-500 transition"
       >
         Update
