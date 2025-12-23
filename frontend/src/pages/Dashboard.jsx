@@ -27,6 +27,13 @@ function Dashboard() {
 
   const handleSubmitMood = async (mood) => {
     try {
+      if (selectedMood) {
+        const id = selectedMood._id;
+        const response = await API.put(`/mood/${id}`, mood);
+        setMoods((prev) => prev.map((m) => (m._id === id ? response.data : m)));
+        setSelectedMood(null);
+        return;
+      }
       const response = await API.post('/mood', mood);
       setMoods((prev) => [...prev, response.data]);
     } catch (error) {
