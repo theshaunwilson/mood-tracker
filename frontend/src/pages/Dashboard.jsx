@@ -25,18 +25,10 @@ function Dashboard() {
     fetchMoods();
   }, []);
 
-  const handleAddMood = async (mood) => {
+  const handleSubmitMood = async (mood) => {
     try {
       const response = await API.post('/mood', mood);
       setMoods((prev) => [...prev, response.data]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleUpdateMood = async (mood) => {
-    try {
-      setSelectedMood(mood);
     } catch (error) {
       console.error(error);
     }
@@ -68,10 +60,9 @@ function Dashboard() {
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-5xl mx-auto ">
         <h1 className="text-5xl font-bold mb-6 text-gray-800">Dashboard</h1>
-        <h2 className="text-2xl font-bold mt-2 mb-2 text-gray-800">Add Mood</h2>
 
         <MoodForm
-          onSubmit={handleAddMood}
+          onSubmit={handleSubmitMood}
           selectedMood={selectedMood}
           setSelectedMood={setSelectedMood}
           setMoods={setMoods}

@@ -21,9 +21,20 @@ function MoodForm({ onSubmit, selectedMood, setSelectedMood, setMoods }) {
     setNote('');
   };
 
+  const cancelSubmit = (e) => {};
+
   return (
     <div className="bg-white rounded shadow-sm p-4 max-w-md">
+      {/* Error */}
       {error && <Error message={error} />}
+      {/* Conditional Add or Error title */}
+      {selectedMood ? (
+        <h2 className="text-2xl font-bold mt-2 mb-2 text-gray-800">
+          Edit Mood
+        </h2>
+      ) : (
+        <h2 className="text-2xl font-bold mt-2 mb-2 text-gray-800">Add Mood</h2>
+      )}
       <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
         {/* Emoji */}
         <label htmlFor="emoji" className="text-lg">
@@ -50,12 +61,27 @@ function MoodForm({ onSubmit, selectedMood, setSelectedMood, setMoods }) {
           placeholder="Enter your note..."
           className="bg-gray-50 rounded"
         />
-        {/* Submit */}
+        {/* Conditional Add or Update Mood */}
+        {selectedMood ? (
+          <button
+            type="submit"
+            className="px-4 py-2 rounded bg-purple-600 text-white text-sm font-medium hover:bg-purple-700 transition"
+          >
+            Edit Mood
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className="px-4 py-2 rounded bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition"
+          >
+            Add Mood
+          </button>
+        )}
         <button
           type="submit"
-          className="px-4 py-2 rounded bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition"
+          className="px-4 py-2 rounded bg-yellow-500 text-white text-sm font-medium hover:bg-yellow-600 transition"
         >
-          Add Mood
+          Cancel
         </button>
       </form>
     </div>
