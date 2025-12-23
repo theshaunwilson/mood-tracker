@@ -1,11 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import API from '../services/api';
-import Error from '../components/Error';
+import Error from './Error';
 
-function MoodForm({ onSubmit }) {
+function MoodForm({ onSubmit, selectedMood, setSelectedMood, setMoods }) {
   const [emoji, setEmoji] = useState('');
   const [note, setNote] = useState('');
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (selectedMood) {
+      setEmoji(selectedMood.emoji);
+      setNote(selectedMood.note);
+    }
+  }, [selectedMood]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

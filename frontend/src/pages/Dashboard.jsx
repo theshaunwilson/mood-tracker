@@ -8,6 +8,7 @@ import MoodForm from '../components/MoodForm';
 
 function Dashboard() {
   const [moods, setMoods] = useState([]);
+  const [selectedMood, setSelectedMood] = useState(null);
   const { logout, token } = useAuth();
   const navigate = useNavigate();
 
@@ -33,9 +34,9 @@ function Dashboard() {
     }
   };
 
-  const handleUpdateMood = async (id) => {
+  const handleUpdateMood = async (mood) => {
     try {
-      console.log(id);
+      setSelectedMood(mood);
     } catch (error) {
       console.error(error);
     }
@@ -65,11 +66,16 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto ">
         <h1 className="text-5xl font-bold mb-6 text-gray-800">Dashboard</h1>
         <h2 className="text-2xl font-bold mt-2 mb-2 text-gray-800">Add Mood</h2>
 
-        <MoodForm onSubmit={handleAddMood} />
+        <MoodForm
+          onSubmit={handleAddMood}
+          selectedMood={selectedMood}
+          setSelectedMood={setSelectedMood}
+          setMoods={setMoods}
+        />
 
         <h2 className="text-2xl font-bold mt-2 mb-2 text-gray-800">
           Recent moods
@@ -78,7 +84,7 @@ function Dashboard() {
         <div className="bg-white rounded shadow-sm p-4 mb-4">
           <MoodTable
             moods={moods}
-            onUpdate={handleUpdateMood}
+            onUpdate={setSelectedMood}
             onDelete={handleDeleteMood}
           />
         </div>
