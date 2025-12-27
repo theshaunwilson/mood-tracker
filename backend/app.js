@@ -1,28 +1,33 @@
 // Imports
-require('dotenv').config();
-const express = require('express');
-const app = express();
-const cors = require('cors');
-const authMiddlewear = require('./middlewear/authMiddlewear');
-const connectDB = require('./config/db');
 
-// Route Imports
+const express = require('express');
+const cors = require('cors');
+
+const mongoose = require('mongoose');
+
+const config = require('./utils/config');
+const logger = require('./utils/logger');
+const middleware = require('./utils/middleware');
+
 const authRoutes = require('./routes/authRoutes');
 const moodRoutes = require('./routes/moodRoutes');
 
-// Connect to database
-connectDB();
+const app = express();
 
-// Middlewear
+mongoose
+  .connect(config.MONGODB_URI)
+  .then(() => logger.info('Connected to MongoDB'))
+  .catch((error) => logger.error('Error connecting to mongoDB'));
+
 app.use(
   cors({
     origin: 'http://localhost:5173',
     credentials: true,
   })
 );
-
 app.use(express.json());
-app.use(authMiddlewear.tokenExtractor);
+app.use(middleware.requestLogger);
+app.use(middleware.tokenExtractor);
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -32,8 +37,7 @@ app.get('/', (req, res) => {
   res.json({ message: 'Mood tracker api' });
 });
 
-// Server
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server running on Port ${PORT}`);
-});
+app.use(middleware.unknownEndpoint);
+app.use(middleware.errorHandler);
+
+module.exports = app;
