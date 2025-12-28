@@ -6,3 +6,10 @@ describe('dummy', () => {
     expect(dummy(moods)).toBe(1);
   });
 });
+
+describe('totalMoods', () => {
+  test('of empty array is 0', () => {
+    const moods = [];
+    expect(totalMoods(moods)).toBe(1);
+  });
+});
