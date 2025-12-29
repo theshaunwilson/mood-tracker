@@ -3,7 +3,7 @@ const dummy = (moods) => {
 };
 
 const totalMoods = (moods) => {
-  return moods.reduce((acc, blog) => acc + blog, 0);
+  return moods.length;
 };
 
 const moodCounts = (moods) => {
