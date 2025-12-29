@@ -18,4 +18,4 @@ const moodCounts = (moods) => {
   return moodTally;
 };
 
-module.exports(dummy, totalMoods, moodCounts);
+module.exports = { dummy, totalMoods, moodCounts };
