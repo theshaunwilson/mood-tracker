@@ -31,7 +31,7 @@ app.use(middleware.tokenExtractor);
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/mood', authMiddlewear.userExtractor, moodRoutes);
+app.use('/api/mood', middleware.userExtractor, moodRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Mood tracker api' });
