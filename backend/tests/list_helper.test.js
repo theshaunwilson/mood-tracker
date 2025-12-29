@@ -43,7 +43,7 @@ describe('totalMoods', () => {
         note: 'Mood note three',
       },
     ];
-    expect(totalMoods(moods).toEqual({ '😊': 3 }));
+    expect(totalMoods(moods)).toBe(3);
   });
 });
 
@@ -70,7 +70,7 @@ describe('moodCounts', () => {
       },
     ];
 
-    expect(moodCounts(moods).toEqual({}));
+    expect(moodCounts(moods)).toEqual({ '😊': 3 });
   });
 
   test('counts multiple different emojis correctly', () => {
