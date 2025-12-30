@@ -41,4 +41,5 @@ module.exports = {
   initialMoods,
   nonExistingId,
   moodsInDb,
+  usersInDb,
 };
