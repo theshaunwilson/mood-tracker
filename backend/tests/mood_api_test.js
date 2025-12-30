@@ -22,3 +22,17 @@ beforeEach(async () => {
   const loginResponse = await api.post('/api/auth/login').send(testUser);
   token = loginResponse.body.token;
 });
+
+describe('mood api', () => {
+  test('moods are returned as json', async () => {
+    await api
+      .get('/api/mood')
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200)
+      .expect('Content-Type', /application\/json/);
+  });
+});
+
+after(async () => {
+  await mongoose.connection.close();
+});
