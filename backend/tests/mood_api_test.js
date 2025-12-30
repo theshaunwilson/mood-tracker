@@ -31,6 +31,24 @@ describe('mood api', () => {
       .expect(200)
       .expect('Content-Type', /application\/json/);
   });
+
+  test('a valid mood can be added', async () => {
+    const newMood = { emoji: '😊', note: 'Mood note' };
+
+    await api
+      .post('/api/mood')
+      .set('Authorization', `Bearer ${token}`)
+      .send(newMood)
+      .expect(201)
+      .expect('Content-Type', /application\/json/);
+
+    const moods = await helper.moodsInDb();
+    assert.strictEqual(moods.length, 1);
+  });
+
+  test('unauthorized requrest returns 401', async () => {
+    await api.get('/api/mood').expect(401);
+  });
 });
 
 after(async () => {
