@@ -11,10 +11,11 @@ const User = require('../models/User');
 const listHelper = require('../utils/list_helper');
 const helper = require('./test_helper');
 
+let token = null;
+
 beforeEach(async () => {
   await Mood.deleteMany({});
   await User.deleteMany({});
-  await Mood.insertMany(helper.initialMoods);
 
   const testUser = { email: 'test@test.com', password: 'testpassword' };
   await api.post('/api/auth/signup').send(testUser);
