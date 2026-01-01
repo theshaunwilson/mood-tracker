@@ -1,7 +1,6 @@
 const User = require('../models/User');
-const Mood = require('../models/Mood');
 
-exports.getUser = async (req, res) => {
+exports.getUsers = async (req, res) => {
   try {
     const users = await User.find({})
       .select('-password')
