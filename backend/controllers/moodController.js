@@ -2,7 +2,11 @@ const Mood = require('../models/Mood');
 
 exports.getMoods = async (req, res) => {
   try {
-    const moods = await Mood.find({ user: req.user._id }).sort({ date: -1 });
+    const moods = await Mood.find({ user: req.user._id })
+      .populate('user', {
+        email: 1,
+      })
+      .sort({ date: -1 });
 
     res.json(moods);
   } catch (error) {
