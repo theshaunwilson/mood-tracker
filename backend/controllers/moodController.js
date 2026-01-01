@@ -1,4 +1,5 @@
 const Mood = require('../models/Mood');
+const User = require('../models/User');
 
 exports.getMoods = async (req, res) => {
   try {
@@ -39,13 +40,17 @@ exports.getMoodById = async (req, res) => {
 exports.createMood = async (req, res) => {
   try {
     const { emoji, note, date } = req.body;
+    const user = req.user;
 
     const mood = await Mood.create({
       emoji,
       note,
       date,
-      user: req.user._id,
+      user: user._id,
     });
+
+    user.moods = user.moods.concat(mood._id);
+    await user.save();
 
     res.status(201).json(mood);
   } catch (error) {
