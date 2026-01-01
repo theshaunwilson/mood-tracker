@@ -11,6 +11,7 @@ const middleware = require('./utils/middleware');
 
 const authRoutes = require('./routes/authRoutes');
 const moodRoutes = require('./routes/moodRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use(middleware.tokenExtractor);
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/mood', middleware.userExtractor, moodRoutes);
+app.use('/api/user', middleware.userExtractor, userRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Mood tracker api' });
