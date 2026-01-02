@@ -10,9 +10,9 @@ function AuthProvider({ children }) {
 
   // Restore token on app load
   useEffect(() => {
-    const storedToken = localStorage.getItem('token');
-    if (storedToken) {
-      setToken(storedToken);
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
     }
     setLoading(false);
   }, []);
@@ -35,6 +35,7 @@ function AuthProvider({ children }) {
       const { token, user } = response.data;
 
       localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
       setUser(user);
       setToken(token);
 
@@ -59,6 +60,7 @@ function AuthProvider({ children }) {
       const { token, user } = response.data;
 
       localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
       setUser(user);
       setToken(token);
 
@@ -77,6 +79,7 @@ function AuthProvider({ children }) {
 
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setUser(null);
     setToken(null);
   };
