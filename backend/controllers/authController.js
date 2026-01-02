@@ -61,7 +61,8 @@ exports.login = async (req, res) => {
       expiresIn: 60 * 60,
     });
 
-    res.status(200).send({ token });
+    user.password = undefined;
+    res.status(200).send({ user, token });
   } catch (error) {
     console.error('login error', error);
     res.status(500).json({ error: 'Server error' });
