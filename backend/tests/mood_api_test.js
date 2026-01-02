@@ -51,6 +51,37 @@ describe('mood api', () => {
   });
 });
 
+describe('authentication', () => {
+  test('login succeeds with correct credentials', async () => {
+    const user = {
+      email: 'test@test.com',
+      password: 'testpassword',
+    };
+
+    const response = await api.post('/api/auth/login').send(user).expect(200);
+
+    assert.ok(response.body.token);
+  });
+
+  test('login fails with wrong password', async () => {
+    const wrongCredentials = {
+      email: 'test@test.com',
+      password: 'wrongpassword',
+    };
+
+    await api.post('/api/auth/login').send(wrongCredentials).expect(401);
+  });
+
+  test('login fails with non-existent user', async () => {
+    const nonExistant = {
+      email: 'nonExistant@email.com',
+      password: 'nonExistant',
+    };
+
+    await api.post('/api/auth/login').send(nonExistant).expect(404);
+  });
+});
+
 after(async () => {
   await mongoose.connection.close();
 });
