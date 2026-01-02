@@ -10,7 +10,13 @@ function AuthProvider({ children }) {
 
   // Restore token on app load
   useEffect(() => {
+    const storedToken = localStorage.getItem('token');
     const storedUser = localStorage.getItem('user');
+
+    if (storedToken) {
+      setToken(storedToken);
+    }
+
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
