@@ -1,3 +1,5 @@
+import propTypes from 'prop-types';
+
 function MoodTable({ moods, onDelete, onUpdate }) {
   const moodItems = moods.map((mood) => (
     <li key={mood._id} className="bg-gray-50">
@@ -20,5 +22,11 @@ function MoodTable({ moods, onDelete, onUpdate }) {
 
   return <ul className="f gap-2">{moodItems}</ul>;
 }
+
+MoodTable.propTypes = {
+  moods: propTypes.array.isRequired,
+  onUpdate: propTypes.func.isRequired,
+  onDelete: propTypes.func.isRequired,
+};
 
 export default MoodTable;

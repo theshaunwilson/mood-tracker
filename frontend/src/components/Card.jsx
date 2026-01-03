@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 function Card({ children, title }) {
   return (
@@ -9,9 +9,9 @@ function Card({ children, title }) {
   );
 }
 
-Card.PropTypes = {
-  children: PropTypes.node.isRequired,
-  title: PropTypes.string,
+Card.propTypes = {
+  children: propTypes.node.isRequired,
+  title: propTypes.string,
 };
 
 export default Card;
