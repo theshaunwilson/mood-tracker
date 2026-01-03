@@ -24,7 +24,13 @@ function MoodTable({ moods, onDelete, onUpdate }) {
 }
 
 MoodTable.PropTypes = {
-  moods: PropTypes.array.isRequired,
+  moods: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      emoji: PropTypes.string.isRequired,
+      note: PropTypes.string,
+    })
+  ).isRequired,
   onUpdate: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
