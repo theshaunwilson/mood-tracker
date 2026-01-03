@@ -9,7 +9,7 @@ function Card({ children, title }) {
   );
 }
 
-Card.PropTypes = {
+Card.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string,
 };

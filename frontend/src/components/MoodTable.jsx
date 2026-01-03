@@ -23,7 +23,7 @@ function MoodTable({ moods, onDelete, onUpdate }) {
   return <ul className="f gap-2">{moodItems}</ul>;
 }
 
-MoodTable.PropTypes = {
+MoodTable.propTypes = {
   moods: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,

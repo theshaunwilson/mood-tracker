@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import API from '../services/api';
 import Error from './Error';
+import PropTypes from 'prop-types';
 
 function MoodForm({ onSubmit, selectedMood, setSelectedMood }) {
   const [emoji, setEmoji] = useState('');
@@ -97,5 +98,15 @@ function MoodForm({ onSubmit, selectedMood, setSelectedMood }) {
     </div>
   );
 }
+
+MoodForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  selectedMood: PropTypes.shape({
+    _id: PropTypes.string,
+    emoji: PropTypes.string,
+    note: PropTypes.string,
+  }),
+  setSelectedMood: PropTypes.func.isRequired,
+};
 
 export default MoodForm;
