@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function Card({ children, title }) {
   return (
     <div className="text-2xl font-bold mt-2 mb-2 text-gray-800">
@@ -6,5 +8,10 @@ function Card({ children, title }) {
     </div>
   );
 }
+
+Card.PropTypes = {
+  children: PropTypes.node.isRequired,
+  title: PropTypes.string,
+};
 
 export default Card;
