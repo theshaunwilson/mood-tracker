@@ -5,6 +5,7 @@ import API from '../services/api';
 
 import MoodTable from '../components/MoodTable';
 import MoodForm from '../components/MoodForm';
+import Card from '../components/Card';
 
 function Dashboard() {
   const [moods, setMoods] = useState([]);
@@ -68,24 +69,22 @@ function Dashboard() {
       <div className="max-w-5xl mx-auto ">
         <h1 className="text-5xl font-bold mb-6 text-gray-800">Dashboard</h1>
 
-        <MoodForm
-          onSubmit={handleSubmitMood}
-          selectedMood={selectedMood}
-          setSelectedMood={setSelectedMood}
-          setMoods={setMoods}
-        />
+        <Card title="Add moods">
+          <MoodForm
+            onSubmit={handleSubmitMood}
+            selectedMood={selectedMood}
+            setSelectedMood={setSelectedMood}
+            setMoods={setMoods}
+          />
+        </Card>
 
-        <h2 className="text-2xl font-bold mt-2 mb-2 text-gray-800">
-          Recent moods
-        </h2>
-
-        <div className="bg-white rounded shadow-sm p-4 mb-4">
+        <Card title="Recent moods">
           <MoodTable
             moods={moods}
             onUpdate={setSelectedMood}
             onDelete={handleDeleteMood}
           />
-        </div>
+        </Card>
 
         <button
           onClick={handleLogout}
