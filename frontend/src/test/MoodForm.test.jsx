@@ -36,4 +36,28 @@ describe('MoodForm component', () => {
       note: 'Feeling great',
     });
   });
+
+  test('when selectedMood is provided, form displays "Edit Mood" button rather than "Add Mood"', () => {
+    const mockOnSubmit = vi.fn();
+    const mockSetSelectedMood = vi.fn();
+
+    const selectedMood = {
+      _id: 12345,
+      emoji: '😊',
+      note: 'To be edited',
+    };
+
+    render(
+      <MoodForm
+        onSubmit={mockOnSubmit}
+        selectedMood={selectedMood}
+        setSelectedMood={mockSetSelectedMood}
+      />
+    );
+
+    screen.getByRole('button', { name: /edit mood/i });
+
+    const editButton = screen.getByRole('button', { name: /edit mood/i });
+    expect(editButton).toBeInTheDocument();
+  });
 });
